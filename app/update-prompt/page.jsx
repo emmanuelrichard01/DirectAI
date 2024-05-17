@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
@@ -15,19 +15,13 @@ const UpdatePrompt = () => {
 
   useEffect(() => {
     const getPromptDetails = async () => {
-      try {
-        const response = await fetch(`/api/prompt/${promptId}`);
-        const data = await response.json();
+      const response = await fetch(`/api/prompt/${promptId}`);
+      const data = await response.json();
 
-        if (data) {
-          setPost({
-            prompt: data.prompt,
-            tags: data.tags || [],
-          });
-        }
-      } catch (error) {
-        console.error("Failed to fetch prompt details:", error);
-      }
+      setPost({
+        prompt: data.prompt,
+        tags: data.tags,
+      });
     };
 
     if (promptId) getPromptDetails();
@@ -37,33 +31,25 @@ const UpdatePrompt = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!promptId) {
-      setIsSubmitting(false);
-      return alert("Missing PromptId!");
-    }
+    if (!promptId) return alert("Missing PromptId!");
 
     try {
       const response = await fetch(`/api/prompt/${promptId}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           prompt: post.prompt,
           tags: post.tags,
         }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (response.ok) {
         router.push("/");
-      } else {
-        const errorData = await response.json();
-        console.error("Failed to update prompt:", errorData);
-        alert("Failed to update prompt: " + errorData.message);
       }
     } catch (error) {
-      console.error("Failed to update prompt:", error);
-      alert("Failed to update prompt. Please try again later.");
+      console.log(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -71,7 +57,7 @@ const UpdatePrompt = () => {
 
   return (
     <Form
-      type="Edit"
+      type='Edit'
       post={post}
       setPost={setPost}
       submitting={submitting}
@@ -80,4 +66,12 @@ const UpdatePrompt = () => {
   );
 };
 
-export default UpdatePrompt;
+const UpdatePromptPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UpdatePrompt />
+    </Suspense>
+  );
+};
+
+export default UpdatePromptPage;

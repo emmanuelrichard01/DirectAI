@@ -48,11 +48,11 @@ const Nav = () => {
           <Image
             src="/assets/images/dlogo.svg"
             alt="logo"
-            width={35}
-            height={35}
+            width={50}
+            height={50}
             className="object-contain"
           />
-          <p className="logo_text">DIRECT-AI</p>
+          {/* <p className="logo_text">DIRECT-AI</p> */}
         </Link>
 
         {/* Desktop Navigation */}

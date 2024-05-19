@@ -14,7 +14,7 @@ const RootLayout = ({ children }) => {
       <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-        <link rel="shortcut icon" href="/sprompts/public/assets/images/dlogo.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/sprompts/public/assets/images/dlogo.ico" type="image/x-icon" />
       </head>
       <body>
         <Provider>

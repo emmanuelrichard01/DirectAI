@@ -46,13 +46,13 @@ const Nav = () => {
       <nav className="flex-between w-full py-5 px-12">
         <Link href="/" className="flex gap-2 flex-center" aria-label="Home">
           <Image
-            src="/assets/images/DAI.svg"
+            src="/assets/images/dlogo.svg"
             alt="logo"
-            width={30}
-            height={30}
+            width={35}
+            height={35}
             className="object-contain"
           />
-          {/* <p className="logo_text">Direct-Ai</p> */}
+          <p className="logo_text">DIRECT-AI</p>
         </Link>
 
         {/* Desktop Navigation */}

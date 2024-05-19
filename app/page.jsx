@@ -9,7 +9,7 @@ const Home = () => {
         </span>{' '}
         & Structured
         <br className="max-md:hidden" />
-        <span className="blue_gradient text-center"> Modern AI-Prompts</span>
+        <span className="orange_gradient text-center"> Modern AI-Prompts</span>
       </h1>
       <p className="desc text-center">
         <span className="font-semibold">Direct Ai</span> is an open-source AI
